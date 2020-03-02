@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-center">TO-DO</h2>
+    </div>
+    <div class="col-6 mx-auto">
+      <div class="form-container">
+        <form (submit)="addTodo($event)" class="d-flex flex-column">
+          <input
+            class="form-control"
+            [(ngModel)]="newTodo"
+            (keyup.enter)="newTodo = ''"
+            name="newTodo"
+            placeholder="Enter New TODO"
+          />
+          <button
+            class="btn btn-primary my-3"
+            type="submit"
+            [disabled]="!newTodo"
+          >
+            Add Todo
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <ul class="list-group">
+        <li
+          *ngFor="let todo of todos; index as i"
+          class="list-group-item d-flex justify-content-between animated"
+        >
+          <input
+            type="checkbox"
+            class="form-check-input ml-1"
+            [(ngModel)]="todo.completed"
+          />
+          <span
+            class="h6 ml-4 todo-item"
+            [ngClass]="{ checked: todo.completed }"
+            >{{ todo.title }}
+          </span>
+          <span (click)="deleteTodo(todo.id, i)" class="delete-icon"
+            ><img
+              class="img-fluid"
+              style="height: 20px;"
+              src="../assets/rubbish.svg"
+              alt="delete"
+            />
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
